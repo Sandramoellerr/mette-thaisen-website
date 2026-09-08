@@ -240,6 +240,7 @@
   gap: 1rem;
   /* kører uendeligt fra HØJRE mod VENSTRE. Lavere tal = hurtigere. */
   animation: karrusel-scroll 40s linear infinite;
+  will-change: transform; /* jævnere animation på mobil */
 }
 
 .galleri-billeder img {
@@ -267,16 +268,25 @@
   animation-play-state: paused;
 }
 
-/* respekter brugere der har slået animationer fra */
+/* Respekter brugere der har slået animationer fra (fx "Reducér
+   bevægelse" i iOS – det er slået til på rigtig mange telefoner).
+   Så stopper auto-scrollen, og båndet bliver i stedet et billede-
+   bånd, man selv kan swipe igennem. */
 @media (prefers-reduced-motion: reduce) {
-  .galleri-billeder .karrusel-spor {
-    animation: none;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
   .galleri-billeder {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* blød swipe på iOS */
     -webkit-mask-image: none;
     mask-image: none;
+  }
+  .galleri-billeder .karrusel-spor {
+    animation: none;
+  }
+  /* Sæt 2 er kun til den uendelige løkke – skjul de gentagne
+     billeder, når der ikke scrolles automatisk. */
+  .galleri-billeder .karrusel-spor img[aria-hidden="true"] {
+    display: none;
   }
 }
 
