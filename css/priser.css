@@ -1,0 +1,473 @@
+/* ============================================================
+   PRISER – priser.html
+   Skrevet mobile-first: alt ligger i én kolonne på mobil, og
+   folder sig ud i flere kolonner fra 700px / 1000px.
+   Samme spalte, margin og padding som resten (base.css).
+
+   Afsnit:
+     1. Topbillede
+     2. Nyhed-kort
+     3. Individuel behandling
+     4. Vælg den pris der passer til dig
+     5. Book din tid
+     6. Betingelser for afbestilling
+     7. Fælles: sektionstitel med streger, kort-ikon
+   ============================================================ */
+
+/* ============================================================
+   1. TOPBILLEDE – går kant til kant
+   ============================================================ */
+main .sidebanner {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebanner figure {
+  margin: 0;
+}
+.sidebanner figure img {
+  width: 100%;
+  height: 42vw;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+/* ============================================================
+   2. NYHED-KORT
+   Sandfarvet kort der lapper en anelse op over topbilledet.
+   ============================================================ */
+.nyhed {
+  background-color: var(--sand);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(63, 95, 104, 0.14);
+  padding: 1.6rem;
+  margin: -3.5rem 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  position: relative;
+}
+
+.nyhed > img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: center 25%;
+  border-radius: 16px;
+}
+
+.nyhed .kicker {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: var(--petroleum);
+  color: var(--hvid);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 0.6rem;
+}
+
+.nyhed h2 {
+  margin-bottom: 0.6rem;
+}
+
+.nyhed-bund {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 0.6rem;
+}
+
+.nyhed-bund ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.nyhed-bund li {
+  margin: 0.35rem 0;
+  font-size: 0.92rem;
+}
+
+.nyhed-pris {
+  flex-shrink: 0;
+  width: 9.5rem;
+  height: 9.5rem;
+  border-radius: 50%;
+  background-color: var(--salvie);
+  color: var(--tekst);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+.nyhed-pris p {
+  margin: 0.1rem 0;
+  font-size: 0.72rem;
+}
+.nyhed-pris .belob {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+@media (min-width: 700px) {
+  .nyhed {
+    flex-direction: row;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2.4rem;
+    margin: -5rem auto 0;
+    max-width: 74rem;
+  }
+  .nyhed > img {
+    flex: 0 0 34%;
+    height: 320px;
+  }
+  .nyhed-tekst {
+    flex: 1;
+  }
+  .nyhed-bund {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .nyhed-bund ul {
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   3. INDIVIDUEL BEHANDLING
+   ============================================================ */
+.pris-liste {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.pris-kort {
+  border: 1.5px solid var(--petroleum);
+  border-radius: 16px;
+  padding: 1.8rem 1.6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pris-kort h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+  margin: 0.3rem 0 0.6rem;
+}
+.pris-kort p {
+  margin: 0.15rem 0;
+  font-size: 0.92rem;
+}
+.pris-kort .spar {
+  color: var(--petroleum-moerk);
+  font-weight: 600;
+}
+.pris-kort .pris-tal {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0.6rem 0 1.2rem;
+}
+.pris-kort .knap {
+  margin: 0 auto;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+}
+
+.pris-note {
+  margin: 1.6rem auto 0;
+  max-width: 40rem;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--petroleum-moerk);
+}
+
+@media (min-width: 700px) {
+  .pris-liste {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+  }
+}
+
+/* ============================================================
+   4. VÆLG DEN PRIS DER PASSER TIL DIG
+   Ingen sektions-baggrund – bare tre grønne kort.
+   ============================================================ */
+.prisvalg {
+  background: none;
+}
+
+.pris-gruppe {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.gruppe {
+  background-color: var(--salvie);
+  border-radius: 16px;
+  padding: 1.8rem 1.6rem;
+}
+.gruppe h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
+  margin: 0.3rem 0 0.8rem;
+}
+.gruppe p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+.gruppe .pris-tal {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.9rem;
+}
+.gruppe .gruppe-note {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 1000px) {
+  .pris-gruppe {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+    align-items: start;
+  }
+}
+
+/* ============================================================
+   5. BOOK DIN TID
+   ============================================================ */
+.book-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.book-foto {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.book-cta h2 {
+  margin-bottom: 0.6rem;
+}
+
+.book-knapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+.book-knapper .knap {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+.book-knapper .knap span {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.85;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.book-kontakt {
+  margin-top: 1.6rem;
+  font-size: 0.85rem;
+  color: var(--petroleum-moerk);
+}
+.book-kontakt span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 1.2rem;
+  white-space: nowrap;
+}
+.book-kontakt img {
+  width: 14px;
+  height: 14px;
+}
+
+@media (min-width: 700px) {
+  .book-cta {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+  .book-foto {
+    flex: 0 0 38%;
+    height: 340px;
+  }
+  .book-cta-tekst {
+    flex: 1;
+  }
+  .book-knapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+   6. BETINGELSER FOR AFBESTILLING
+   Ramme uden fyld.
+   ============================================================ */
+.betingelser {
+  border: 1.5px solid var(--petroleum);
+  border-radius: 18px;
+}
+.betingelser h2 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.05rem;
+  margin-bottom: 1.4rem;
+}
+.betingelser ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.betingelser li {
+  margin: 0.7rem 0;
+  font-size: 0.92rem;
+}
+
+/* ============================================================
+   7. FÆLLES
+   ============================================================ */
+
+/* Sektionstitel med en tynd streg på hver side */
+.linje-titel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+}
+.linje-titel::before,
+.linje-titel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--bordeaux);
+  opacity: 0.45;
+}
+
+@media (min-width: 700px) {
+  .linje-titel {
+    font-size: 1.2rem;
+    gap: 2rem;
+  }
+}
+
+/* Rundt logo-ikon øverst på priskortene */
+.kort-ikon {
+  display: block;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background-color: var(--salvie);
+  background-image: url(../images/logo-ikon-blaa.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 56%;
+  margin-bottom: 1rem;
+}
+.gruppe .kort-ikon {
+  background-color: var(--creme);
+}
+
+/* ============================================================
+   8. OLIVENGREN – dekorative vandmærker
+   Grenen fra footeren gentaget som store, meget svage grene i
+   sektionernes hjørner, så siden ikke virker så tom.
+   Billedet bruges som maske, så farven bliver præcis --salvie.
+   ============================================================ */
+.individuel,
+.prisvalg,
+.book-cta,
+.betingelser {
+  position: relative;
+  overflow: hidden;
+}
+
+/* det rigtige indhold skal ligge OVEN PÅ vandmærket */
+.individuel > *,
+.prisvalg > *,
+.book-cta > *,
+.betingelser > * {
+  position: relative;
+  z-index: 1;
+}
+
+.individuel::before,
+.prisvalg::before,
+.book-cta::before,
+.betingelser::before {
+  content: "";
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  background-color: var(--salvie);
+  -webkit-mask: url(../images/ikon-gren-hvid.png) no-repeat center / contain;
+  mask: url(../images/ikon-gren-hvid.png) no-repeat center / contain;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.individuel::before {
+  top: -5rem;
+  right: -5rem;
+  transform: rotate(20deg);
+}
+.prisvalg::before {
+  bottom: -6rem;
+  left: -6rem;
+  transform: rotate(-150deg);
+}
+.book-cta::before {
+  top: -4rem;
+  right: -6rem;
+  transform: rotate(-25deg);
+}
+.betingelser::before {
+  bottom: -5rem;
+  left: -4rem;
+  transform: rotate(140deg);
+}
+
+@media (min-width: 700px) {
+  .individuel::before,
+  .prisvalg::before,
+  .book-cta::before,
+  .betingelser::before {
+    width: 30rem;
+    height: 30rem;
+  }
+}

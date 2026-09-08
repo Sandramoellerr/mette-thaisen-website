@@ -1,0 +1,757 @@
+/* ============================================================
+   METTE THAISEN – KROPSTERAPI
+   base.css  –  FÆLLES for alle sider
+
+   Styling sker via KLASSER. id bruges kun til JavaScript og til
+   spring-links (#balance, #ro, #nerver, #kontaktinfo).
+
+   Indhold:
+     1. Grundlag – farver, typografi, globalt layout
+     2. Header og navigation
+     3. Knapper (.knap, .knap-lys, .knap-hul)
+     4. Hero og sidebanner (topbillede)
+     5. Kort med billede (forside + om mig)
+     6. Generisk <details> ("Læs mere"-bokse)
+     7. Footer
+
+   Hver side loader base.css FØRST og derefter sin egen fil
+   (fx css/priser.css), så sidens regler kan bygge ovenpå.
+   ============================================================ */
+
+/* ============================================================
+   1. GRUNDLAG
+   ============================================================ */
+:root {
+  --creme: #f5eee2; /* baggrund, det lyse beige */
+  --sand: #ece1cd; /* lidt mørkere beige til bokse */
+  --salvie-lys: #bcd6c9; /* lyseste grønblå (ydelse 1) */
+  --salvie: #93b9a7; /* grønblå (ydelse 2 / "RO") */
+  --petroleum: #5f8791; /* mellem petroleumsblå (ydelse 3 / "NERVER") */
+  --petroleum-moerk: #3f5f68; /* mørk petroleumsblå (ydelse 4, footer, bånd) */
+  --bordeaux: #7c2c48; /* vinrød til knapper og bånd */
+  --bordeaux-moerk: #5c1f36; /* mørkere vinrød til hover */
+  --tekst: #2c2620; /* næsten sort tekstfarve */
+  --hvid: #ffffff;
+}
+
+* {
+  box-sizing: border-box; /* gør at padding ikke lægges oveni bredden */
+}
+
+html {
+  scroll-behavior: smooth; /* bløde spring til #anker-links */
+  overflow-x: hidden; /* værn mod vandret scrollbar fra hero-breakout */
+}
+
+body {
+  margin: 0;
+  background-color: var(--creme);
+  color: var(--tekst);
+  font-family: "Poppins", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 0.6em 0;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin: 0 0 1em 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--bordeaux);
+}
+
+ul,
+ol {
+  padding-left: 1.2em;
+}
+
+/* Alt hovedindhold ligger i ÉN centreret spalte:
+   - fast maks-bredde, så linjerne ikke bliver uendeligt lange
+   - vandret centreret med god luft ud til kanterne på store skærme
+   - rigelig, ens luft mellem sektionerne (margin klapper sammen,
+     så der ikke bliver dobbelt afstand)
+   Undtagelser med egne regler: header, hero-billedet (.hero),
+   det farvede bånd (.bjaelke) og footer. */
+main section,
+main .sidebanner {
+  max-width: 78rem;
+  margin-inline: auto; /* vandret centreret på store skærme */
+  padding: 2.5rem 1.8rem; /* luft indeni – også i top og bund */
+}
+
+/* Sektioner med farvet baggrund får ekstra indre luft, så farven
+   får plads at ånde. Selve farverne sættes i sidernes egne filer. */
+.hvad-er-manuvision,
+.forloebets-gang,
+.prisvalg,
+.tryg-rum {
+  padding: 4.5rem 1.8rem;
+}
+
+/* --- 1. tablet --- */
+@media (min-width: 700px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+  h2 {
+    font-size: 1.9rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  main section,
+  main .sidebanner {
+    margin-block: 8rem; /* luft mellem sektioner */
+    padding: 4rem 2.5rem; /* mere luft indeni på større skærme */
+  }
+
+  .hvad-er-manuvision,
+  .forloebets-gang,
+  .prisvalg,
+  .tryg-rum {
+    padding: 6rem 2.5rem;
+  }
+}
+
+/* --- 1. computer --- */
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 2.9rem;
+  }
+}
+
+/* ============================================================
+   2. HEADER OG NAVIGATION
+   ============================================================ */
+header {
+  background-color: var(--sand);
+  padding: 1rem 1.2rem;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logoet er ét billede – vi sætter kun en højde og lader
+   bredden følge med selv. */
+.logo img {
+  height: 90px;
+  width: auto;
+}
+
+/* Alle <details> i menuen (burger + "Praktisk information")
+   nulstilles, så de ikke arver den generiske details-boks fra
+   afsnit 6. */
+header nav details {
+  position: relative;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* Burgerknappen (kun ikonet ☰ / ✕). ">" så det kun rammer
+   burgermenuens EGEN summary. */
+.mobilmenu > summary {
+  list-style: none; /* fjerner standard-trekanten */
+  cursor: pointer;
+  font-size: 0; /* skjul "Menu"-teksten ... */
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+}
+
+.mobilmenu > summary::-webkit-details-marker {
+  display: none; /* fjerner trekanten i Safari/Chrome */
+}
+
+.mobilmenu[open] > summary::before {
+  content: "✕";
+}
+.mobilmenu > summary::before {
+  content: "☰";
+  font-size: 2.3rem; /* ... og vis kun ikonet */
+}
+
+.mobilmenu .menu-links {
+  position: absolute;
+  right: 0;
+  top: 3.4rem;
+  background-color: var(--hvid);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 200px;
+}
+
+.menu-links a {
+  text-decoration: none;
+  color: var(--tekst);
+  font-size: 1rem;
+}
+
+.menu-links a:hover {
+  color: var(--bordeaux);
+}
+
+/* Book-knappen i mobilmenuen: fyldt, ligesom de primære knapper */
+.menu-links .book-knap {
+  background-color: var(--bordeaux);
+  color: var(--hvid);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  text-align: center;
+}
+
+/* "Praktisk information"-dropdownen (både mobil og computer).
+   Summary'en skal ligne de andre menu-links. */
+.praktisk-detaljer summary,
+.praktisk-detaljer-desktop summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--tekst);
+  text-decoration: none;
+}
+
+.praktisk-detaljer summary::-webkit-details-marker,
+.praktisk-detaljer-desktop summary::-webkit-details-marker {
+  display: none;
+}
+
+.praktisk-detaljer summary::after,
+.praktisk-detaljer-desktop summary::after {
+  content: "▾";
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-size: 0.7em;
+}
+
+.praktisk-detaljer[open] summary::after,
+.praktisk-detaljer-desktop[open] summary::after {
+  content: "▴";
+}
+
+/* På computer folder undermenuen sig ud som en lille hvid boks */
+.praktisk-links-desktop {
+  position: absolute;
+  left: 0;
+  top: 2.2rem;
+  background-color: var(--sand);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 230px;
+  z-index: 5;
+}
+
+.praktisk-links-desktop a {
+  text-decoration: none;
+  color: var(--hvid);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.praktisk-links-desktop a:hover {
+  color: var(--bordeaux);
+}
+
+/* I mobilmenuen folder undermenuen sig ud på linje med et let indryk.
+   Linkene arver farve, hover og størrelse fra ".menu-links a" ovenfor. */
+.praktisk-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0.8rem 0 0 0.8rem;
+  border-left: 2px solid var(--sand);
+  margin-top: 0.5rem;
+}
+
+/* Book-knappen til computer-visning */
+.book-knap-desktop {
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.55rem 1.4rem;
+  border-radius: 30px;
+  text-align: center;
+  background-color: var(--bordeaux);
+  border-color: var(--bordeaux);
+  color: var(--hvid);
+}
+
+/* Computer-linkene er skjult på mobil (der bruges burgermenuen) */
+.skrivebord-links {
+  display: none;
+}
+
+.book-knap-desktop:hover {
+  background-color: var(--bordeaux-moerk);
+  border-color: var(--bordeaux-moerk);
+  color: var(--hvid);
+}
+
+/* --- 2. tablet: burgermenu væk, almindelige links frem --- */
+@media (min-width: 700px) {
+  .mobilmenu {
+    display: none;
+  }
+
+  .skrivebord-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* Book-knappen holdes UDENFOR med :not(), så den beholder sin
+     hvide tekst fra sin egen regel ovenfor. */
+  .skrivebord-links a:not(.book-knap-desktop) {
+    text-decoration: none;
+    color: var(--tekst);
+    font-size: 0.95rem;
+  }
+
+  .skrivebord-links a:not(.book-knap-desktop):hover {
+    color: var(--bordeaux);
+  }
+
+  header nav {
+    gap: 2rem;
+  }
+}
+
+/* --- 2. computer --- */
+@media (min-width: 1000px) {
+  header nav {
+    margin: 0;
+  }
+}
+
+/* Linket til den side man står på – script.js sætter
+   aria-current="page". :not(.book-knap-desktop) er med for at give
+   reglen nok styrke til at vinde over menu-link-reglen ovenfor. */
+.skrivebord-links a:not(.book-knap-desktop)[aria-current="page"],
+.menu-links a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 700;
+  color: var(--tekst);
+}
+
+/* ============================================================
+   3. KNAPPER
+   .knap      = fyldt bordeaux (standard)
+   .knap-lys  = hvid baggrund, blå kant – centreret på egen linje
+   .knap-hul  = gennemsigtig med kant (sekundær)
+   ============================================================ */
+.knap {
+  display: inline-block;
+  background-color: var(--bordeaux);
+  color: var(--hvid);
+  text-decoration: none;
+  padding: 0.85rem 1.7rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-inline: auto;
+}
+
+.knap:hover {
+  background-color: var(--bordeaux-moerk);
+}
+
+.knap-lys {
+  display: block;
+  width: fit-content; /* så knappen kun er så bred som teksten */
+  margin: 2rem auto 6rem; /* top · auto = centreret · bund */
+  background-color: var(--hvid);
+  color: var(--petroleum-moerk);
+  border: 2px solid var(--petroleum-moerk);
+}
+
+.knap-lys:hover {
+  background-color: var(--petroleum-moerk);
+  color: var(--hvid);
+  border: 2px solid var(--petroleum-moerk);
+}
+
+.knap-hul {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--tekst);
+  text-decoration: none;
+  padding: 0.8rem 1.6rem;
+  border: 1.5px solid var(--bordeaux-moerk);
+  border-radius: 30px;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.knap-hul:hover {
+  background-color: var(--hvid);
+  color: var(--tekst);
+}
+
+/* Ekstra bundluft under "Læs mere om mig"-knappen på forsiden */
+.om-mig-kort .knap {
+  margin-bottom: 3rem;
+}
+
+/* ============================================================
+   4. HERO OG SIDEBANNER
+   Hero = forsidens store billede med tekst ovenpå.
+   Sidebanner = det enkle topbillede på de øvrige sider.
+   ============================================================ */
+
+/* Hero bryder ud til skærmkanten. calc(50% - 50vw) er præcis
+   det modsatte af forælderens margin i hver side. */
+main .hero {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-bottom: 3.5rem;
+}
+
+/* På mobil har selve hero-sektionen samme side-luft som resten af
+   siden (3rem), men billedet bryder ud af den padding og går helt
+   ud til begge skærmkanter. */
+.hero {
+  padding: 0 3rem;
+}
+
+.hero figure {
+  margin: 0 -3rem;
+}
+
+.hero figure img {
+  width: 100%;
+  height: 60vw;
+  object-fit: cover;
+}
+
+/* Strandbilledet er meget bredt, og Mette står i venstre side. */
+.hero figure img[src*="foto-strand-banner"] {
+  object-position: 22% center;
+}
+
+.hero-tekst {
+  padding: 1.8rem 0;
+}
+
+.hero-tekst .kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--petroleum-moerk);
+  font-weight: 600;
+}
+
+/* Knappe-rækken bruges både i hero og i sidebanner */
+.hero-knapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* Sidebanner: billedet har ingen tekst ovenpå. */
+.sidebanner {
+  padding: 0;
+}
+
+.sidebanner figure {
+  margin: 0;
+}
+
+.sidebanner figure img {
+  width: 100%;
+  height: 50vw;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.sidebanner figure img[src*="foto-strand-banner"] {
+  object-position: 22% center;
+}
+
+.sidebanner-tekst {
+  padding: 1.8rem 1.2rem;
+}
+
+/* --- 4. tablet: hero-tekst lægges ovenpå billedet i højre side --- */
+@media (min-width: 700px) {
+  main .hero {
+    position: relative;
+    padding: 0;
+    margin-bottom: 4.5rem; /* left/right arves fra breakout-reglen */
+  }
+
+  /* Fra tablet og op fylder billedet hele hero'en igen. */
+  .hero figure {
+    margin: 0;
+  }
+
+  .hero figure img {
+    height: 36vw;
+    min-height: 420px;
+    max-height: 620px;
+  }
+
+  .hero-tekst {
+    position: absolute;
+    top: 50%;
+    right: 7%;
+    transform: translateY(-50%);
+    width: 34%;
+    padding: 0;
+  }
+
+  .hero .hero-knapper {
+    justify-content: flex-start;
+  }
+
+  /* Sidebanner forbliver enkelt: billede øverst, tekst under */
+  main .sidebanner {
+    padding: 0;
+  }
+
+  .sidebanner figure img {
+    height: 30vw;
+    max-height: 340px;
+  }
+
+  .sidebanner-tekst {
+    padding: 2.5rem 3rem;
+  }
+}
+
+/* ============================================================
+   5. KORT MED BILLEDE
+   .billede-kort  = <section> (forside: .om-mig-kort, .forloeb-kort;
+                    om mig: .historie)
+   .kort-indhold  = den indre wrapper med billede + tekst
+   ============================================================ */
+.billede-kort {
+  text-align: start;
+}
+
+.forloeb-kort img,
+.historie img {
+  border-radius: 16px;
+  margin: 1.2rem auto;
+  width: 100%;
+  height: auto;
+}
+.forloeb-kort img {
+  margin-top: 10rem;
+}
+.om-mig-kort img {
+  border-radius: 16px;
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  margin-block: 4rem;
+}
+
+/* --- 5. tablet: billede og tekst side om side --- */
+@media (min-width: 700px) {
+  .kort-indhold {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    text-align: left;
+  }
+  .om-mig-kort .kort-indhold {
+    flex-direction: row-reverse;
+    max-width: 90ch;
+    margin-left: 20rem;
+  }
+
+  .kort-indhold > * {
+    flex: 1;
+    min-width: 0; /* forhindrer at billedet presser teksten for smal */
+  }
+
+  .billede-kort img {
+    margin: 0;
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+  }
+  .om-mig-kort img {
+    height: auto;
+    max-width: 100%;
+    margin-left: 6rem;
+  }
+}
+
+/* ============================================================
+   6. GENERISK <details>  ("Læs mere"-bokse)
+   Bruges på forløb- og priser-siden. Header-menuens <details>
+   er nulstillet i afsnit 2.
+   ============================================================ */
+details {
+  background-color: var(--sand);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.6rem 0 1.2rem 0;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--petroleum-moerk);
+}
+
+details p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   7. FOOTER (ens på alle sider)
+   ============================================================ */
+footer {
+  background-color: var(--petroleum-moerk);
+  color: var(--hvid);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 4rem;
+}
+
+.footer-dekoration {
+  display: none; /* pynte-grenen vises kun fra computer-bredde */
+}
+
+footer h2 {
+  color: var(--hvid);
+  font-size: 2rem;
+  margin: 0 0 0.3rem 0;
+}
+
+.footer-logo img {
+  width: 170px;
+  max-width: 100%;
+  margin: 2rem auto;
+}
+
+footer p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+
+.footer-kontakt p,
+.footer-adresse p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.footer-kontakt img,
+.footer-adresse img {
+  width: 16px;
+  height: 16px;
+}
+
+.footer-mail {
+  margin-bottom: 3rem;
+}
+
+footer a {
+  color: var(--hvid);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- 7. tablet: footer som én vandret linje --- */
+@media (min-width: 700px) {
+  footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding-inline: 6rem;
+    padding-block: 8rem;
+  }
+
+  .footer-logo {
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  .footer-logo img {
+    margin: 0;
+  }
+
+  .footer-mail {
+    margin: 0;
+  }
+
+  .footer-kontakt p,
+  .footer-adresse p {
+    justify-content: flex-start;
+  }
+
+  .footer-dekoration {
+    display: block;
+    position: absolute;
+    right: 2rem;
+    bottom: -1.5rem;
+    height: 140%;
+    width: auto;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}
+
+/* --- 7. computer --- */
+@media (min-width: 1000px) {
+  footer {
+    margin: 0;
+  }
+}

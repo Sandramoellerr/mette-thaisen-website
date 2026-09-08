@@ -1,0 +1,306 @@
+/* ============================================================
+   OM MIG – om-mig.html
+   Samme designsprog som forsiden: salviegrønne bånd/kort,
+   hvide inder-paneler, runde hjørner og god luft.
+
+   Afsnit:
+     1. Intro ("Om mig")
+     2. Certificering – grønt bånd med hvidt kort + rundt mærke
+     3. Min historie – foto + tekst
+     4. Certificeret og registreret hos – grønt logo-bånd
+     5. Udtalelser
+   ============================================================ */
+
+/* ============================================================
+   1. INTRO ("Om mig")
+   Kort tekst med et lille portræt ved siden – intet stort banner.
+   ============================================================ */
+.om-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-width: 78rem;
+  margin: 3.5rem auto 0;
+  padding: 0 1.8rem;
+}
+
+.om-intro figure {
+  margin: 0;
+}
+
+.om-intro figure img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 20px;
+}
+
+.om-intro-tekst .kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--petroleum-moerk);
+  margin-bottom: 0.4rem;
+}
+
+.om-intro-tekst h1 {
+  margin-bottom: 0.7rem;
+}
+
+@media (min-width: 700px) {
+  .om-intro {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 3.5rem;
+    margin-top: 5.5rem;
+    padding-inline: 2.5rem;
+  }
+  .om-intro figure {
+    flex: 0 0 34%;
+  }
+  .om-intro figure img {
+    height: 340px;
+  }
+  .om-intro-tekst {
+    flex: 1;
+  }
+}
+
+/* ============================================================
+   2. CERTIFICERING
+   Grønt bånd i FULD bredde (som en sektion) → hvidt kort i midten
+   → rundt Manuvision-mærke der stikker op over kortets hjørne.
+   ============================================================ */
+.certificering {
+  background-color: var(--salvie-lys);
+  max-width: none;
+  margin: 6rem 0 0;
+  padding: 5rem 1.6rem;
+}
+
+.certificering-indhold {
+  display: block; /* overskriver flex fra base */
+  position: relative;
+  max-width: 74rem;
+  margin-inline: auto;
+  background-color: var(--hvid);
+  border-radius: 20px;
+  padding: 2.6rem 1.6rem;
+  box-shadow: 0 18px 40px rgba(63, 95, 104, 0.18);
+}
+
+.certificering .badge {
+  position: absolute;
+  top: -34px;
+  right: -8px;
+  width: 88px;
+  height: 88px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: none;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.certificering h2 {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin-bottom: 1.4rem;
+  padding-right: 3.5rem; /* plads til mærket på mobil */
+}
+
+.certificering ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.certificering li {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.92rem;
+}
+.certificering li:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 700px) {
+  .certificering {
+    margin-top: 8rem;
+    padding: 8rem 2.5rem;
+  }
+  .certificering-indhold {
+    padding: 4rem 3.5rem;
+  }
+  .certificering .badge {
+    width: 120px;
+    height: 120px;
+    top: -50px;
+    right: -20px;
+  }
+  .certificering h2 {
+    font-size: 1.35rem;
+    padding-right: 0;
+  }
+  .certificering ul {
+    columns: 2;
+    column-gap: 3.5rem;
+  }
+  .certificering li {
+    break-inside: avoid;
+  }
+}
+
+/* ============================================================
+   3. MIN HISTORIE  (bruger .billede-kort fra base.css)
+   ============================================================ */
+.historie {
+  margin-top: 6rem;
+}
+
+.historie img {
+  border-radius: 20px;
+}
+
+.historie .knap {
+  margin-inline: 0;
+  margin-top: 1.4rem;
+}
+
+/* Signatur nederst i "Læs mere"-boksen */
+.historie-signatur {
+  margin: 0.6rem 0 0;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--petroleum-moerk);
+}
+
+@media (min-width: 700px) {
+  .historie {
+    margin-top: 8rem;
+  }
+  .historie .kort-indhold {
+    flex-direction: row; /* foto til venstre, tekst til højre */
+    gap: 3.5rem;
+    align-items: center;
+    max-width: none;
+  }
+  .historie img {
+    height: 440px;
+  }
+}
+
+/* ============================================================
+   4. CERTIFIKAT-BÅND
+   En stribe med certifikat-logoerne der kører i uendelig løkke
+   fra VENSTRE mod HØJRE. Ingen baggrundsfarve – kun billederne.
+   Logoerne ligger to gange i HTML, så løkken bliver sømløs.
+   ============================================================ */
+.udmaerkelser {
+  background: none;
+  max-width: none;
+  margin: 6rem 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.logo-baand {
+  overflow: hidden;
+}
+
+.logo-spor {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 0; /* ingen mellemrum – én lang stribe */
+  animation: logo-baand-scroll 32s linear infinite;
+}
+
+.logo-spor img {
+  height: 90px;
+  width: auto;
+  flex: 0 0 auto;
+}
+
+/* -50% -> 0 : indholdet bevæger sig fra venstre mod højre.
+   Lavere tal end 32s = hurtigere. */
+@keyframes logo-baand-scroll {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* pause når musen holdes over */
+.logo-baand:hover .logo-spor {
+  animation-play-state: paused;
+}
+
+/* respektér brugere der har slået animationer fra */
+@media (prefers-reduced-motion: reduce) {
+  .logo-spor {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 700px) {
+  .udmaerkelser {
+    margin-block: 8rem; /* samme rytme som resten af siderne */
+  }
+  .logo-spor img {
+    height: 130px;
+  }
+}
+
+/* ============================================================
+   5. UDTALELSER
+   Første citat på lys sand, andet i et grønt kort – for variation.
+   ============================================================ */
+.udtalelser h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.udtalelse-liste {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.udtalelser blockquote {
+  margin: 0;
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  background-color: var(--sand);
+}
+
+.udtalelser blockquote:nth-child(2) {
+  background-color: var(--salvie-lys);
+}
+
+.udtalelser cite {
+  display: block;
+  margin-top: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--petroleum-moerk);
+}
+
+@media (min-width: 700px) {
+  .udtalelse-liste {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .udtalelser blockquote {
+    padding: 2.6rem 2.4rem;
+  }
+}

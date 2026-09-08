@@ -1,0 +1,411 @@
+/* ============================================================
+   FORLØB – forloeb.html
+   Skrevet mobile-first. Sektionerne følger samme spalte, margin
+   og padding som de øvrige sider – det styres i base.css via
+   "main section". Header og footer er også fælles (base.css).
+
+   Afsnit:
+     1. Intro (foto + tekst)
+     2. Faner (spring ned til emnet)
+     3. Spørgsmål / svar
+     4. Forløbets gang (fire farvede trin-kort)
+   ============================================================ */
+
+/* ============================================================
+   1. INTRO
+   Kort tekst med et lille foto ved siden – intet stort banner.
+   ============================================================ */
+.forloeb-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-width: 78rem;
+  margin: 4rem auto 0;
+  padding: 0 1.8rem;
+}
+
+.forloeb-intro figure {
+  margin: 0;
+}
+
+.forloeb-intro figure img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: 20px;
+}
+
+.forloeb-intro-tekst .kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--petroleum-moerk);
+  margin-bottom: 0.4rem;
+}
+
+.forloeb-intro-tekst h1 {
+  margin-bottom: 0.8rem;
+}
+
+@media (min-width: 700px) {
+  .forloeb-intro {
+    flex-direction: row;
+    align-items: center;
+    gap: 3.5rem;
+    margin-top: 5.5rem;
+    padding-inline: 2.5rem;
+  }
+  .forloeb-intro figure {
+    flex: 0 0 34%;
+  }
+  .forloeb-intro figure img {
+    height: 340px;
+  }
+  .forloeb-intro-tekst {
+    flex: 1;
+  }
+}
+
+/* ============================================================
+   2. FANER
+   Tre pille-links der springer ned til hvert emne.
+   ============================================================ */
+.faner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  background-color: var(--salvie);
+  margin: 3rem 0 0;
+  padding: 2rem 2rem;
+}
+
+.faner a {
+  text-decoration: none;
+  padding: 0.7rem 1.7rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--bordeaux);
+  background-color: var(--creme);
+}
+
+.faner a:hover {
+  background-color: var(--hvid);
+}
+
+@media (min-width: 700px) {
+  .faner {
+    gap: 1.5rem;
+    margin-top: 7rem;
+    padding: 2rem 2.5rem;
+  }
+  .faner a {
+    padding: 0.85rem 2.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================
+   3. SPØRGSMÅL / SVAR
+   Sandfarvet bånd i fuld bredde (samme farve som headeren).
+   Teksten holdes i en smal spalte, så linjerne er behagelige
+   at læse.
+   ============================================================ */
+.sporgsmaal-svar {
+  background-color: var(--sand);
+  max-width: none;
+  margin-inline: 0;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Teksten holdes i en smal spalte og ligger OVEN PÅ vandmærkerne */
+.sporgsmaal-svar > * {
+  position: relative;
+  z-index: 1;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding-inline: 1.8rem;
+}
+
+/* Gren-vandmærker ude i den tomme luft i hver side.
+   Grenen fra footeren brugt som maske – her i hvid. */
+.sporgsmaal-svar::before,
+.sporgsmaal-svar::after {
+  content: "";
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+  background-color: var(--hvid);
+  -webkit-mask: url(../images/ikon-gren-hvid.png) no-repeat center / contain;
+  mask: url(../images/ikon-gren-hvid.png) no-repeat center / contain;
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 0;
+}
+.sporgsmaal-svar::before {
+  top: 2rem;
+  left: -5rem;
+  transform: rotate(-25deg);
+}
+.sporgsmaal-svar::after {
+  bottom: 2rem;
+  right: -5rem;
+  transform: rotate(155deg);
+}
+
+@media (min-width: 900px) {
+  .sporgsmaal-svar::before,
+  .sporgsmaal-svar::after {
+    width: 32rem;
+    height: 32rem;
+  }
+  .sporgsmaal-svar::before {
+    left: -2rem;
+  }
+  .sporgsmaal-svar::after {
+    right: -2rem;
+  }
+}
+
+.qa-gruppe {
+  scroll-margin-top: 6rem; /* så anker-spring ikke gemmer sig under header */
+}
+
+.qa-gruppe + .qa-gruppe {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.sporgsmaal-svar h3 {
+  margin-bottom: 0.4rem;
+  color: var(--petroleum-moerk);
+  font-weight: bold;
+}
+.sporgsmaal-svar h3:not(:first-child) {
+  margin-top: 2.4rem;
+}
+
+.qa-foto {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-top: 1.5rem;
+}
+
+/* "Læs mere" er et fladt link, der folder svaret ud (ingen boks) */
+.sporgsmaal-svar details {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0.8rem 0 0;
+}
+.sporgsmaal-svar details p {
+  margin: 0.8rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--salvie);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 700px) {
+  .sporgsmaal-svar {
+    padding: 6rem 0;
+    margin-top: 0;
+  }
+  .sporgsmaal-svar > * {
+    padding-inline: 2.5rem;
+  }
+  .qa-foto {
+    height: 320px;
+  }
+}
+
+/* "Læs mere" skifter til "Luk", når boksen er åben.
+   Den rigtige tekst i HTML skjules, og pseudo-elementet viser
+   den aktuelle tilstand. */
+.sporgsmaal-svar summary,
+.forloebets-gang summary {
+  font-size: 0;
+}
+.sporgsmaal-svar summary::after,
+.forloebets-gang summary::after {
+  content: "Læs mere";
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.sporgsmaal-svar details[open] summary::after,
+.forloebets-gang details[open] summary::after {
+  content: "Luk";
+}
+
+/* ============================================================
+   4. FORLØBETS GANG
+   Sandfarvet sektion i FULD bredde (kant til kant). Indholdet
+   holdes i samme spalte som resten via ".forloebets-gang > *".
+   Fire farvede trin-kort – samme grøn/blå-skala som "Mine ydelser".
+   ============================================================ */
+.forloebets-gang {
+  background-color: var(--sand);
+  position: relative;
+  overflow: hidden;
+  max-width: none;
+  margin-inline: 0;
+  padding: 0 0 5rem; /* ingen top-padding – den hvide bjælke er flush med toppen */
+}
+
+/* alt indhold (undtagen den hvide titel-bjælke) tilbage i midterspalten */
+.forloebets-gang > *:not(.forloebets-gang-top) {
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.8rem;
+}
+
+/* Hvid titel-bjælke i fuld bredde øverst */
+.forloebets-gang-top {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--hvid);
+  padding-block: 2.4rem;
+  margin-bottom: 3rem;
+}
+.forloebets-gang-top h2 {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding-inline: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--bordeaux);
+}
+
+/* Olivengrøn gren i højre side af den hvide bjælke.
+   Billedet bruges som maske, så farven bliver præcis --salvie. */
+.gren-dekoration {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 8rem;
+  height: 8rem;
+  background-color: var(--salvie);
+  -webkit-mask: url(../images/ikon-gren-blaa.png) no-repeat center / contain;
+  mask: url(../images/ikon-gren-blaa.png) no-repeat center / contain;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.forloebets-gang-brod {
+  max-width: 46rem;
+}
+
+.trin-liste {
+  counter-reset: trin;
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.trin {
+  counter-increment: trin;
+  border-radius: 16px;
+  padding: 1.6rem 1.4rem;
+}
+
+.trin h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+}
+.trin h3::before {
+  content: counter(trin);
+  display: block;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.7rem;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  opacity: 0.55;
+}
+
+/* inde i trin-kortene er "Læs mere" bare tekst i kortets egen farve */
+.trin details {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+.trin summary {
+  color: inherit;
+}
+.trin details p {
+  margin: 0.8rem 0 0;
+  font-size: 0.9rem;
+}
+
+.trin-1 {
+  background-color: var(--salvie-lys);
+  color: var(--tekst);
+}
+.trin-2 {
+  background-color: var(--salvie);
+  color: var(--tekst);
+}
+.trin-3 {
+  background-color: var(--petroleum);
+  color: var(--hvid);
+}
+.trin-4 {
+  background-color: var(--petroleum-moerk);
+  color: var(--hvid);
+}
+
+/* Book-knappen centreret, som på skitsen */
+.forloebets-gang .knap {
+  display: block;
+  width: fit-content;
+  margin: 3rem auto 0;
+  padding: 0.85rem 1.9rem;
+}
+
+@media (min-width: 700px) {
+  .forloebets-gang {
+    padding: 0 0 7rem;
+  }
+  .forloebets-gang > *:not(.forloebets-gang-top) {
+    padding-top: 5rem;
+  }
+  .forloebets-gang-top {
+    padding: 3rem;
+  }
+  .forloebets-gang-top h2 {
+    padding-inline: 2.5rem;
+  }
+  .gren-dekoration {
+    width: 11rem;
+    height: 100rem;
+    right: 3rem;
+  }
+  /* intro-teksten i to spalter som på skitsen */
+  .forloebets-gang-brod {
+    columns: 2;
+    column-gap: 3rem;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1000px) {
+  .trin-liste {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    /* "start" gør, at kun det kort man åbner vokser –
+       de øvrige beholder deres højde. */
+    align-items: start;
+  }
+}

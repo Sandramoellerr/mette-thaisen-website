@@ -1,0 +1,65 @@
+/* ============================================================
+   MANUVISION – manuvision.html
+   Sektioner der kun findes på manuvision-siden:
+     1. Hvad er Manuvision (farvet sektion)
+     2. Chok & traume
+     3. Forskning
+
+   (Sidebanner, header og footer ligger i css/base.css.
+   Den indre luft på .hvad-er-manuvision sættes fælles i base.css.)
+   ============================================================ */
+
+/* ============================================================
+   1. HVAD ER MANUVISION
+   ============================================================ */
+.hvad-er-manuvision {
+  background-color: var(--salvie);
+}
+
+/* ============================================================
+   2. CHOK & TRAUME
+   ============================================================ */
+.chok-traume-indhold {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.chok-traume .badge {
+  width: 100px;
+  border-radius: 50%;
+}
+
+/* ============================================================
+   3. FORSKNING
+   ============================================================ */
+.forskning {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tekst-link med understregning i stedet for knap-look */
+.tekst-link {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--bordeaux);
+  font-weight: 600;
+  border-bottom: 1.5px solid var(--bordeaux);
+  margin-top: 0.5rem;
+}
+
+/* --- tablet --- */
+@media (min-width: 700px) {
+  .chok-traume-indhold {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 2rem;
+  }
+
+  .chok-traume .badge {
+    flex-shrink: 0;
+  }
+}

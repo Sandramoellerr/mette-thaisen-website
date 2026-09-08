@@ -1,0 +1,77 @@
+/* ============================================================
+   KONTAKT – kontakt.html
+   Sektioner der kun findes på kontakt-siden:
+     1. Kontaktinfo (foto + kontaktboks)
+     2. Trygt rum (farvet sektion nederst)
+
+   (Sidebanner, header og footer ligger i css/base.css.
+   Den indre luft på .tryg-rum sættes fælles i base.css.
+   #kontaktinfo beholder sit id, fordi "Book"-knappen i banneret
+   linker til #kontaktinfo.)
+   ============================================================ */
+
+/* ============================================================
+   1. KONTAKTINFO
+   ============================================================ */
+.kontaktinfo {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.kontakt-foto {
+  border-radius: 16px;
+}
+
+.kontakt-boks {
+  background-color: var(--sand);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.kontakt-boks dl {
+  margin: 0;
+}
+
+.kontakt-boks dt {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.kontakt-boks dt img {
+  width: 18px;
+  height: 18px;
+}
+
+.kontakt-boks dt:first-of-type {
+  margin-top: 0;
+}
+
+.kontakt-boks dd {
+  margin: 0.2rem 0 0 1.6rem;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   2. TRYGT RUM
+   ============================================================ */
+.tryg-rum {
+  background-color: var(--petroleum-moerk);
+  color: var(--hvid);
+  text-align: center;
+}
+
+.tryg-rum img {
+  border-radius: 16px;
+  margin: 1.2rem auto;
+}
+
+/* --- tablet --- */
+@media (min-width: 700px) {
+  .kontaktinfo {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}

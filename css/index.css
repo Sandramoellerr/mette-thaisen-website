@@ -1,0 +1,304 @@
+/* ============================================================
+   FORSIDEN – index.html
+   Sektioner der kun findes på forsiden:
+     1. Om mig – teaser
+     2. Mine ydelser – fire farvede bokse
+     3. Bånd / bjælke
+     4. Galleri-karrusel
+
+   (Hero, header og footer ligger i css/base.css. "Kort med
+   billede"-grundlaget ligger også i base.css – herunder giver vi
+   forsidens "Om mig"-udgave sit eget, mere personlige udseende.)
+   ============================================================ */
+
+/* ============================================================
+   1. OM MIG – teaser
+   Grønt "kort" med foto, en lille label over overskriften og en
+   håndskrift-agtig signatur under teksten. Samme salvie-grønne
+   tone som bl.a. certificering-boksen.
+   ============================================================ */
+.om-mig-kort {
+  background-color: var(--salvie-lys);
+  border-radius: 24px;
+  box-shadow: 0 16px 38px rgba(63, 95, 104, 0.16);
+  padding: 1.4rem; /* luft mellem kortkanten og indholdet */
+  margin-inline: 1.6rem; /* kortet flyder frit inde fra kanten på mobil */
+}
+
+/* Nulstiller flex + de gamle forsøgsværdier (max-width/margin-left)
+   fra base.css, så kortet står rent. */
+.om-mig-kort .kort-indhold {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  max-width: none;
+  align-items: stretch;
+  text-align: left;
+}
+
+.om-mig-kort img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 16px; /* runde kanter på selve fotoet */
+  margin: 0;
+  max-width: none;
+}
+
+.om-mig-kort .kort-indhold > div {
+  padding: 1.6rem 0.6rem 0.8rem;
+}
+
+/* Lille label OVER overskriften */
+.om-mig-kort h2 {
+  margin-bottom: 0.6rem;
+}
+.om-mig-kort h2::before {
+  content: "Mød mig bag behandlingen";
+  display: block;
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--petroleum-moerk);
+  margin-bottom: 0.5rem;
+}
+
+/* Signatur EFTER teksten */
+.om-mig-kort p::after {
+  content: "— Mette";
+  display: block;
+  margin-top: 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--petroleum-moerk);
+}
+
+.om-mig-kort .knap {
+  margin-inline: 0;
+}
+
+/* --- tablet: tekst til venstre, foto til højre --- */
+@media (min-width: 700px) {
+  .om-mig-kort {
+    padding: 2rem;
+    margin-inline: auto; /* centreret i spalten på større skærme */
+  }
+  .om-mig-kort .kort-indhold {
+    flex-direction: row-reverse;
+    gap: 2.5rem;
+  }
+  .om-mig-kort img {
+    flex: 0 0 42%;
+    width: 42%;
+    height: 460px; /* fast højde, så billedet beskæres pænt i stedet for at gøre kortet kæmpe */
+    align-self: stretch;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+  .om-mig-kort .kort-indhold > div {
+    flex: 1;
+    align-self: center;
+    padding: 1rem 1.4rem;
+  }
+}
+
+/* ============================================================
+   1. MINE YDELSER
+   .ydelse             = fælles boks-styling
+   .ydelse-1 … .ydelse-4 = kun baggrundsfarven
+   ============================================================ */
+
+/* Den sandfarvede baggrund går HELT ud til kanten (som bjælken),
+   mens selve indholdet holdes i samme spalte som resten. */
+.ydelser {
+  background-color: var(--sand);
+  max-width: none;
+  margin-inline: 0;
+  padding: 7rem 0;
+}
+.ydelser > * {
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.8rem;
+}
+
+.ydelse-liste {
+  display: grid;
+  grid-template-columns: 1fr; /* på mobil: én kolonne */
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+.ydelse {
+  border-radius: 14px;
+  padding: 1.8rem 1.4rem;
+  color: var(--hvid);
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* overskrift i top, tekst i bund */
+}
+
+.ydelse-1 {
+  background-color: var(--salvie-lys);
+  color: var(--tekst);
+}
+.ydelse-2 {
+  background-color: var(--salvie);
+}
+.ydelse-3 {
+  background-color: var(--petroleum);
+}
+.ydelse-4 {
+  background-color: var(--petroleum-moerk);
+}
+
+.ydelse h3 {
+  font-size: 1rem;
+}
+.ydelse p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* --- tablet: fire aflange bokse i én række --- */
+@media (min-width: 700px) {
+  .ydelser {
+    padding: 10rem 0;
+  }
+  .ydelser > * {
+    padding-inline: 2.5rem;
+  }
+  .ydelse-liste {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .ydelse {
+    min-height: 300px;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ============================================================
+   2. BÅND / BJÆLKE
+   Hele båndet er ét stort <a>-link til bookingsystemet.
+   ============================================================ */
+.bjaelke {
+  display: block;
+  background-color: var(--petroleum-moerk);
+  color: var(--hvid);
+  text-decoration: none;
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  margin: 6rem 0; /* går ud til kanten – samme rytme som alle andre sektioner */
+  transition: filter 0.2s ease;
+}
+
+.bjaelke:hover {
+  filter: brightness(1.15); /* lysner en anelse ved hover */
+}
+
+.bjaelke h2 {
+  margin-bottom: 0.3rem;
+}
+
+.bjaelke p {
+  margin: 0;
+}
+
+@media (min-width: 700px) {
+  .bjaelke {
+    padding: 4.5rem 2rem;
+    margin: 8rem 0;
+  }
+}
+
+/* ============================================================
+   3. GALLERI-KARRUSEL
+   Billedrækken ligger PRÆCIS to gange i HTML, så løkken
+   ser sømløs ud.
+   ============================================================ */
+.galleri-billeder {
+  overflow: hidden;
+  /* Bryder ud af spalten og går helt ud til skærmkanten – samme
+     trick som hero-billedet. Overskrift og citat bliver i spalten. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* blød fade i begge sider – fjern de to linjer for at slå den fra */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.galleri-billeder .karrusel-spor {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  /* kører uendeligt fra HØJRE mod VENSTRE. Lavere tal = hurtigere. */
+  animation: karrusel-scroll 40s linear infinite;
+}
+
+.galleri-billeder img {
+  height: 260px; /* juster billedhøjden her */
+  width: auto;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+@keyframes karrusel-scroll {
+  from {
+    transform: translateX(0);
+  }
+  /* -50% fordi billedrækken ligger to gange. Byt værdierne for
+     at køre venstre mod højre. */
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* pause når musen holdes over */
+.galleri-billeder:hover .karrusel-spor {
+  animation-play-state: paused;
+}
+
+/* respekter brugere der har slået animationer fra */
+@media (prefers-reduced-motion: reduce) {
+  .galleri-billeder .karrusel-spor {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .galleri-billeder {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+.galleri blockquote {
+  background-color: var(--sand);
+  border-radius: 14px;
+  padding: 1.2rem;
+  font-style: italic;
+  margin: 1.2rem 0 0 0;
+}
+
+.galleri blockquote cite {
+  display: block;
+  margin-top: 0.8rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* --- tablet --- */
+@media (min-width: 700px) {
+  .galleri .galleri-billeder {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
