@@ -154,41 +154,104 @@
 }
 
 /* ============================================================
-   3. MIN HISTORIE  (bruger .billede-kort fra base.css)
+   3. MIN HISTORIE
+   Mobil: én kolonne – to fotos (let forskudt), knap, så tekst.
+   Desktop: venstre spalte med de to forskudte fotos + knap,
+   højre spalte med overskrift og tekst.
    ============================================================ */
 .historie {
   margin-top: 6rem;
 }
 
-.historie img {
-  border-radius: 20px;
+/* venstre spalte: fotos + knap */
+.historie-venstre {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
 }
 
+/* fotogruppen – på mobil ligger foto 2 en anelse forskudt op og
+   ind over foto 1, så det ikke bare er to klodser oven på hinanden */
+.historie-billeder {
+  position: relative;
+}
+
+.historie-billeder img {
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0;
+  box-shadow: 0 16px 36px rgba(63, 95, 104, 0.18);
+}
+
+.historie-billeder .historie-foto-2 {
+  width: 82%;
+  margin: -2.5rem 0 0 auto; /* trukket op og skubbet til højre */
+  position: relative;
+  z-index: 1;
+  border: 5px solid var(--creme); /* lille lys kant, så de adskilles */
+}
+
+/* knappen: bordeaux, versaler – som på skitsen */
 .historie .knap {
-  margin-inline: 0;
-  margin-top: 1.4rem;
+  align-self: flex-start;
+  margin: 0;
+  padding: 1rem 2.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
 }
 
-/* Signatur nederst i "Læs mere"-boksen */
-.historie-signatur {
-  margin: 0.6rem 0 0;
-  font-style: italic;
-  font-weight: 600;
-  color: var(--petroleum-moerk);
+.historie-tekst h2 {
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 700px) {
   .historie {
     margin-top: 8rem;
   }
+
+  /* to spalter: fotos til venstre, tekst til højre */
   .historie .kort-indhold {
-    flex-direction: row; /* foto til venstre, tekst til højre */
-    gap: 3.5rem;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4rem;
     max-width: none;
   }
-  .historie img {
+  .historie .historie-venstre {
+    flex: 0 0 44%;
+  }
+  .historie .historie-tekst {
+    flex: 1;
+  }
+
+  /* fotogruppen får fast højde, så foto 2 kan ligge absolut forskudt */
+  .historie .historie-billeder {
     height: 440px;
+  }
+  .historie-billeder img {
+    height: 300px;
+    border-radius: 6px;
+  }
+  .historie-billeder .historie-foto-1 {
+    position: absolute;
+    width: 64%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    z-index: 0;
+  }
+  .historie-billeder .historie-foto-2 {
+    position: absolute;
+    width: 60%;
+    top: 140px;
+    right: 0;
+    left: auto;
+    margin: 0;
+    z-index: 1;
+    border: 8px solid var(--creme);
   }
 }
 
