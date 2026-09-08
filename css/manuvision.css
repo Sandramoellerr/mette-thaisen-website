@@ -1,43 +1,33 @@
 /* ============================================================
    MANUVISION – manuvision.html
-   Sektioner der kun findes på manuvision-siden:
-     1. Hvad er Manuvision (farvet sektion)
-     2. Chok & traume
-     3. Forskning
+   Skrevet mobile-first: alt ligger i ÉN kolonne på mobil, som
+   på de øvrige sider. Fra 700px lægger teksten sig i en smal
+   spalte til venstre, med plads til badges / gren-pynt ved siden.
+   Header og footer er fælles (base.css).
 
-   (Sidebanner, header og footer ligger i css/base.css.
-   Den indre luft på .hvad-er-manuvision sættes fælles i base.css.)
+   Afsnit:
+     1. Hvad er manuvision            (grøn sektion i fuld bredde)
+     2. Hvad er chok & traume terapi  (badges + tekst)
+     3. Manuvision og forskning i PTSD
+     Fælles: overskrift med streg, gren-vandmærke, tekst-link
    ============================================================ */
 
 /* ============================================================
-   1. HVAD ER MANUVISION
+   FÆLLES
    ============================================================ */
-.hvad-er-manuvision {
-  background-color: var(--salvie);
-}
 
-/* ============================================================
-   2. CHOK & TRAUME
-   ============================================================ */
-.chok-traume-indhold {
+/* Overskrift med en tynd streg, der løber ud til højre */
+.linje-hoejre {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
-  text-align: center;
+  gap: 1.4rem;
 }
-
-.chok-traume .badge {
-  width: 100px;
-  border-radius: 50%;
-}
-
-/* ============================================================
-   3. FORSKNING
-   ============================================================ */
-.forskning {
-  position: relative;
-  overflow: hidden;
+.linje-hoejre::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.3;
 }
 
 /* Tekst-link med understregning i stedet for knap-look */
@@ -47,19 +37,158 @@
   color: var(--bordeaux);
   font-weight: 600;
   border-bottom: 1.5px solid var(--bordeaux);
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+}
+.tekst-link:hover {
+  color: var(--bordeaux-moerk);
+  border-bottom-color: var(--bordeaux-moerk);
 }
 
-/* --- tablet --- */
+/* Tekstspalten holdes smal, så linjerne er behagelige at læse.
+   .manu-indhold er "position: relative", så gren-vandmærket kan
+   ligge absolut i højre side. */
+.manu-indhold {
+  position: relative;
+}
+.manu-tekst {
+  max-width: 40rem;
+}
+
+/* Gren-vandmærke ude i højre side – ren pynt, skjult på mobil */
+.manu-gren {
+  display: none;
+}
+
+/* ============================================================
+   1. HVAD ER MANUVISION
+   Grøn sektion, der går HELT ud til skærmkanten (som bjælken på
+   forsiden). Indholdet holdes i midterspalten.
+   ============================================================ */
+.hvad-er-manuvision {
+  background-color: var(--salvie);
+  max-width: none;
+  margin-inline: 0;
+  margin-top: 0; /* flush op til headeren */
+  padding: 3.5rem 1.8rem;
+}
+.hvad-er-manuvision > * {
+  max-width: 78rem;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   2. HVAD ER CHOK & TRAUME TERAPI
+   Badges (to certificerings-mærker, det ene lidt mindre og
+   forskudt) ved siden af teksten.
+   ============================================================ */
+.chok-traume-indhold {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.chok-badges {
+  position: relative;
+  align-self: center; /* centreret over teksten på mobil */
+  width: 190px;
+  height: 175px;
+  flex-shrink: 0;
+}
+.chok-badges .badge {
+  position: absolute;
+  border-radius: 50%;
+}
+.chok-badges .badge-stor {
+  width: 140px;
+  top: 0;
+  left: 0;
+}
+.chok-badges .badge-lille {
+  width: 88px;
+  right: 0;
+  bottom: 0;
+}
+
+/* ============================================================
+   3. FORSKNING
+   Samme opbygning som afsnit 1: overskrift med streg, smal
+   tekstspalte og et gren-vandmærke til højre.
+   ============================================================ */
+.forskning {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   TABLET / DESKTOP
+   ============================================================ */
 @media (min-width: 700px) {
-  .chok-traume-indhold {
-    flex-direction: row;
-    align-items: center;
-    text-align: left;
-    gap: 2rem;
+  .hvad-er-manuvision {
+    padding: 6rem 2.5rem;
+    overflow: hidden; /* holder gren-vandmærket inde i sektionen */
   }
 
-  .chok-traume .badge {
-    flex-shrink: 0;
+  /* smallere tekstspalte, så der bliver luft til grenen til højre */
+  .manu-tekst {
+    max-width: 34rem;
+  }
+
+  /* gren-vandmærket frem – footerens gren brugt som maske */
+  .manu-gren {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%) rotate(8deg);
+    width: 20rem;
+    height: 20rem;
+    background-color: var(--hvid);
+    -webkit-mask: url(../images/ikon-gren-hvid.png) no-repeat center / contain;
+    mask: url(../images/ikon-gren-hvid.png) no-repeat center / contain;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  /* grenen i forsknings-afsnittet er lidt mørkere og større */
+  .manu-gren-blaa {
+    width: 23rem;
+    height: 23rem;
+    background-color: var(--salvie);
+    -webkit-mask-image: url(../images/ikon-gren-blaa.png);
+    mask-image: url(../images/ikon-gren-blaa.png);
+    opacity: 0.5;
+    transform: translateY(-50%) rotate(-6deg);
+  }
+
+  /* chok & traume: badges til venstre, tekst til højre */
+  .chok-traume-indhold {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3.5rem;
+  }
+  .chok-badges {
+    align-self: flex-start;
+    width: 240px;
+    height: 220px;
+    margin-top: 0.4rem;
+  }
+  .chok-badges .badge-stor {
+    width: 180px;
+  }
+  .chok-badges .badge-lille {
+    width: 110px;
+  }
+  .chok-tekst {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1000px) {
+  .manu-gren {
+    width: 24rem;
+    height: 24rem;
+  }
+  .manu-gren-blaa {
+    width: 28rem;
+    height: 28rem;
   }
 }
